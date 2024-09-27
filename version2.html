@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trafikklys🚦</title>
+    <style>
+      .light-container {
+        background-color: black;
+        width: 124px;
+        height: 312px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        margin: 0 0 10px 30px;
+      }
+
+      .light-container > div {
+        width: 90%;
+        height: 80%;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <!--Denne oppgaven løser du med: Funksjoner, Parameter, Onclick og evt setTimeout().
+    I denne oppgaven skal du lage et trafikklys som bytter fra 
+    rødt - til rødt og gult og så til grønt 
+    ved hjelp av knapper som bytter hvilke sirkler som har farge - 
+    og hvilke farge den har.
+    1. Lag tre sirkler under hverandre, som skal kunne ha en bakgrunnsfarge. 
+       Det øverste kan bli rødt, det i midten kan bli gult/oransje og det nederste grønt.
+    2. Lag 3 knapper - en før rødt lys, en for rødt og gult og en for grønt lys.    
+    3. Bruk funksjon med parameter, CSS klasser og onclick for å få knappene til
+       å endre lysene.
+    4. Når du har fått til dette kan du utfordre deg selv og forsøke å finne 
+       ut hvordan man kan automatisere trafikklyset ved hjelp av setTimeout()-->
+  <body>
+    <div id="app"></div>
+    <script>
+      var i = 0;
+      var intervalId = null;
+
+      function greenLight() {
+        trafficLight("yellowLight", "gray", "gray", "green", "green");
+        setTimeout(yellowLight, 1000);
+      }
+      function yellowLight() {
+        trafficLight("redLight", "gray", "orange", "gray", "gray");
+        setTimeout(redLight, 1000);
+      }
+      function redLight() {
+        trafficLight("redYellowLight", "red", "gray", "gray", "gray");
+        setTimeout(redYellowLight, 1000);
+      }
+      function redYellowLight() {
+        trafficLight("greenLight", "red", "orange", "gray", "gray");
+        setTimeout(greenLight, 1000);
+      }
+
+      function trafficLight(callFunction, color1, color2, color3) {
+        document.getElementById("app").innerHTML = /*html*/ `
+            <div id="lightContainer" class="light-container" onclick="${callFunction}()">    
+            </div>`;
+        lightDiv(color1);
+        lightDiv(color2);
+        lightDiv(color3);
+      }
+
+      function lightDiv(color) {
+        document.getElementById("lightContainer").innerHTML += /*html*/ `
+        <div style="background-color: ${color}"></div>
+        `;
+      }
+
+      greenLight();
+    </script>
+  </body>
+</html>
